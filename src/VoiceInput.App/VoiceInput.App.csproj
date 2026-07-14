@@ -10,7 +10,7 @@
     <Authors>A3Boy and contributors</Authors>
     <RepositoryUrl>https://github.com/A3Boy/codex-voice-input</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\codex-voice-input.ico</ApplicationIcon>
     <UseWinUI>true</UseWinUI>

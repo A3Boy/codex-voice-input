@@ -1,6 +1,7 @@
 param(
     [switch] $SkipDesktopShortcut,
-    [switch] $SkipLaunch
+    [switch] $SkipLaunch,
+    [switch] $SkipVerification
 )
 
 $ErrorActionPreference = "Stop"
@@ -56,38 +57,40 @@ Reset-Directory -Path $installDir -AllowedRoot $programsRoot
 Copy-Item -Path (Join-Path $publishDir "*") -Destination $installDir -Recurse -Force
 $installedExe = Join-Path $installDir "CodexVoiceInput.exe"
 
-$logPath = Join-Path $env:LOCALAPPDATA "CodexVoiceInput\codex-voice-input.log"
-$logBefore = if (Test-Path -LiteralPath $logPath) { [IO.File]::ReadAllText($logPath).Length } else { 0 }
-$verificationProcess = Start-Process -FilePath $installedExe -ArgumentList "--open-settings" -PassThru
-$verified = $false
-try {
-    for ($attempt = 0; $attempt -lt 20; $attempt++) {
-        Start-Sleep -Milliseconds 500
+if (-not $SkipVerification) {
+    $logPath = Join-Path $env:LOCALAPPDATA "CodexVoiceInput\codex-voice-input.log"
+    $logBefore = if (Test-Path -LiteralPath $logPath) { [IO.File]::ReadAllText($logPath).Length } else { 0 }
+    $verificationProcess = Start-Process -FilePath $installedExe -ArgumentList "--open-settings" -PassThru
+    $verified = $false
+    try {
+        for ($attempt = 0; $attempt -lt 20; $attempt++) {
+            Start-Sleep -Milliseconds 500
+            $verificationProcess.Refresh()
+            if ($verificationProcess.HasExited) {
+                break
+            }
+            if (Test-Path -LiteralPath $logPath) {
+                $logContent = [IO.File]::ReadAllText($logPath)
+                $newLog = if ($logContent.Length -gt $logBefore) { $logContent.Substring($logBefore) } else { "" }
+                if ($newLog.Contains("Settings window opened.")) {
+                    $verified = $true
+                    break
+                }
+                if ($newLog.Contains("Application startup failed") -or $newLog.Contains("Settings window failed to open")) {
+                    break
+                }
+            }
+        }
+    }
+    finally {
         $verificationProcess.Refresh()
-        if ($verificationProcess.HasExited) {
-            break
-        }
-        if (Test-Path -LiteralPath $logPath) {
-            $logContent = [IO.File]::ReadAllText($logPath)
-            $newLog = if ($logContent.Length -gt $logBefore) { $logContent.Substring($logBefore) } else { "" }
-            if ($newLog.Contains("Settings window opened.")) {
-                $verified = $true
-                break
-            }
-            if ($newLog.Contains("Application startup failed") -or $newLog.Contains("Settings window failed to open")) {
-                break
-            }
+        if (-not $verificationProcess.HasExited) {
+            Stop-Process -Id $verificationProcess.Id
         }
     }
-}
-finally {
-    $verificationProcess.Refresh()
-    if (-not $verificationProcess.HasExited) {
-        Stop-Process -Id $verificationProcess.Id
+    if (-not $verified) {
+        throw "Installed application failed its startup and settings verification."
     }
-}
-if (-not $verified) {
-    throw "Installed application failed its startup and settings verification."
 }
 
 if (-not $SkipDesktopShortcut) {
