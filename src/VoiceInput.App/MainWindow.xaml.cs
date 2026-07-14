@@ -596,6 +596,7 @@ public sealed partial class MainWindow : Window, IDisposable
         if (!ClipboardService.TrySetText(text, out var error))
         {
             AppDiagnostics.Info($"Recognition text copy failed: {error}");
+            capsuleWindow.ShowCopyFailure();
             return;
         }
         capsuleWindow.ShowCopyConfirmation();

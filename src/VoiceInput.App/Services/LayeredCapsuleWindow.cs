@@ -52,6 +52,7 @@ public sealed class LayeredCapsuleWindow : IDisposable
     private bool dragged;
     private bool previewExpanded;
     private bool copyConfirmed;
+    private bool copyFailed;
     private DockSide dockSide;
     private int previewPanelHeight;
     private float dpiScale = 1f;
@@ -88,6 +89,7 @@ public sealed class LayeredCapsuleWindow : IDisposable
     {
         snapshot = next;
         copyConfirmed = false;
+        copyFailed = false;
         if (next.State != CapsuleState.Recording)
         {
             audioLevel = 0;
@@ -142,6 +144,14 @@ public sealed class LayeredCapsuleWindow : IDisposable
     public void ShowCopyConfirmation()
     {
         copyConfirmed = true;
+        copyFailed = false;
+        Render();
+    }
+
+    public void ShowCopyFailure()
+    {
+        copyConfirmed = false;
+        copyFailed = true;
         Render();
     }
 
@@ -610,7 +620,9 @@ public sealed class LayeredCapsuleWindow : IDisposable
             return;
         }
 
-        using var textBrush = new SolidBrush(snapshot.State == CapsuleState.Ready
+        using var textBrush = new SolidBrush(copyFailed
+            ? darkMode ? Color.FromArgb(255, 252, 216) : Color.FromArgb(170, 93, 32)
+            : snapshot.State == CapsuleState.Ready
             ? darkMode ? Color.FromArgb(236, 243, 252) : Color.FromArgb(34, 48, 66)
             : darkMode ? Color.FromArgb(190, 203, 220) : Color.FromArgb(111, 124, 143));
         using var textFont = new Font("Microsoft YaHei UI", 6.6f, FontStyle.Regular);
@@ -621,7 +633,8 @@ public sealed class LayeredCapsuleWindow : IDisposable
             LineAlignment = StringAlignment.Center,
         };
         var textWidth = snapshot.State == CapsuleState.Ready ? 84 : 116;
-        graphics.DrawString(snapshot.Message, textFont, textBrush, new RectangleF(CapsuleX + 60, CapsuleY + 7, textWidth, 30), format);
+        var text = copyFailed ? "复制失败，请重试" : snapshot.Message;
+        graphics.DrawString(text, textFont, textBrush, new RectangleF(CapsuleX + 60, CapsuleY + 7, textWidth, 30), format);
     }
 
     private void DrawAmbientLightBands(Graphics graphics, GraphicsPath capsulePath)

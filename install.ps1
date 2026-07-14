@@ -28,7 +28,14 @@ try {
     $sumPath = Join-Path $tempRoot $sumAsset.name
     Invoke-WebRequest -Uri $zipAsset.browser_download_url -Headers $headers -OutFile $zipPath
     Invoke-WebRequest -Uri $sumAsset.browser_download_url -Headers $headers -OutFile $sumPath
-    $expected = ((Get-Content -LiteralPath $sumPath | Select-Object -First 1) -split '\s+')[0].Trim().ToLowerInvariant()
+    $checksumLine = Get-Content -LiteralPath $sumPath |
+        Where-Object { $_ -match '\s+CodexVoiceInput-win-x64\.zip$' } |
+        Select-Object -First 1
+    if (-not $checksumLine) {
+        throw "SHA256SUMS.txt does not contain a checksum for CodexVoiceInput-win-x64.zip."
+    }
+
+    $expected = ($checksumLine -split '\s+')[0].Trim().ToLowerInvariant()
     $actual = (Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($actual -ne $expected) {
         throw "SHA-256 verification failed. Expected $expected, received $actual."

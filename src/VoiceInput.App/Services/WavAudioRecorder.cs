@@ -138,7 +138,6 @@ public sealed class WavAudioRecorder : IDisposable
     private void OnDataAvailable(object? sender, WaveInEventArgs args)
     {
         writer?.Write(args.Buffer, 0, args.BytesRecorded);
-        writer?.Flush();
 
         double sum = 0;
         var samples = args.BytesRecorded / 2;
