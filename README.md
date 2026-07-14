@@ -26,7 +26,7 @@
 
 ## Search Keywords
 
-Codex Voice Input, Codex ASR, Codex speech to text, Codex voice typing, ChatGPT speech to text, ChatGPT voice input, Windows speech to text, Windows dictation app, Windows voice typing, 语音输入法, 语音转文字, Windows 语音输入, Codex 语音转文字, ChatGPT 语音输入, ChatGPT 语音转文字, 任意输入框语音输入, Windows 浮动语音输入工具。
+Codex Voice Input, Codex ASR, Codex speech to text, Codex voice typing, ChatGPT speech to text, ChatGPT voice input, multilingual speech recognition, multilingual voice typing, Windows speech to text, Windows dictation app, Windows voice typing, 语音输入法, 语音转文字, 多语言语音识别, 多语种语音转文字, Windows 语音输入, Codex 语音转文字, ChatGPT 语音输入, ChatGPT 语音转文字, 任意输入框语音输入, Windows 浮动语音输入工具。
 
 ## Screenshots
 
@@ -49,7 +49,7 @@ Codex Voice Input 是一个 Windows 桌面语音输入工具。它读取本机 C
 
 - Windows 全局语音输入：在浏览器、微信、编辑器、笔记软件、IDE、文档里都可以使用。
 - 复用 Codex 登录：读取 `%USERPROFILE%\.codex\auth.json`，不需要单独配置 OpenAI API Key。
-- Codex 自动语言识别：中文、英文和混合语言由 Codex 转写端点自动判断。
+- Codex 多语种自动识别：不只中英，常见国家和地区语言、跨语言混说、技术词和产品名都由 Codex 转写端点自动判断。
 - 浮动胶囊 UI：轻量置顶、可拖动、可贴边隐藏，适合长期驻留。
 - 实时录音状态：麦克风音量驱动的动态波形，静音时显示基线。
 - 识别结果预览：可以确认后输入，也可以复制识别文本。
@@ -65,7 +65,7 @@ Codex Voice Input 的核心卖点不是“又一个录音按钮”，而是把 C
 
 Codex 转写特别适合日常真实输入场景：
 
-- 多语言自动匹配：中文、英文、中英混合、技术词、产品名和代码相关表达可以自动识别，不需要手动选择语言。
+- 多语种自动匹配：中文、英文、日语、韩语、法语、德语、西班牙语等常见语言，以及跨语言混说、技术词、产品名和代码相关表达，都不需要手动选择语言。
 - 口语转文字更自然：适合长句、自然停顿和连续表达，比传统命令式语音输入更接近“直接说想法”。
 - 适合创作和编程语境：写需求、写注释、写 README、写提交说明、写聊天回复，都能保留比较自然的表达。
 - 不打断当前窗口：悬浮胶囊常驻桌面，录音、识别、复制、输入都在一个轻量浮层里完成。
@@ -254,7 +254,7 @@ Codex Voice Input is an unofficial Windows voice typing and speech-to-text app f
 
 Codex Voice Input is designed for real daily dictation, not just demo audio transcription. It brings Codex-style speech recognition into the active Windows app, so you can speak directly into documents, chats, browsers, editors, issue trackers, terminals, and IDEs.
 
-- Automatic multilingual recognition: Chinese, English, mixed Chinese-English speech, technical terms, product names, and coding-related phrases can be detected without picking a language first.
+- Automatic multilingual recognition: common languages across many countries and regions can be detected without picking a language first, including Chinese, English, Japanese, Korean, French, German, Spanish, mixed-language speech, technical terms, product names, and coding-related phrases.
 - Natural long-form dictation: speak full thoughts, notes, replies, requirements, or documentation instead of short voice commands.
 - Codex-friendly technical context: useful for code comments, README drafts, commit messages, bug reports, and developer notes.
 - No OpenAI API key setup: it reuses the local Codex login already present on your Windows machine.
