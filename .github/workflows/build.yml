@@ -1,0 +1,23 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Test hotkey parsing
+        shell: pwsh
+        run: dotnet run --project .\tests\HotkeyContract\HotkeyContract.csproj
+      - name: Run source contracts
+        shell: pwsh
+        run: Get-ChildItem .\scripts\test-*-contract.ps1 | ForEach-Object { & $_.FullName }
+      - name: Build Release
+        shell: pwsh
+        run: .\build.ps1 -Configuration Release

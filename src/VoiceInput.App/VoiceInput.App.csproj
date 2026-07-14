@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <RootNamespace>VoiceInput.App</RootNamespace>
+    <AssemblyName>CodexVoiceInput</AssemblyName>
+    <Product>Codex Voice Input</Product>
+    <Description>Unofficial Windows voice input using the reverse-engineered Codex Desktop transcription flow.</Description>
+    <Authors>A3Boy and contributors</Authors>
+    <RepositoryUrl>https://github.com/A3Boy/codex-voice-input</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.1.0</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\codex-voice-input.ico</ApplicationIcon>
+    <UseWinUI>true</UseWinUI>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250602001" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\codex-voice-input.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoiceInput.Core\VoiceInput.Core.csproj" />
+    <ProjectReference Include="..\VoiceInput.Protocol\VoiceInput.Protocol.csproj" />
+  </ItemGroup>
+</Project>
