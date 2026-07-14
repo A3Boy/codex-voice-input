@@ -59,6 +59,22 @@ Codex Voice Input 是一个 Windows 桌面语音输入工具。它读取本机 C
 - 自动清理临时录音：识别完成、失败、取消后删除录音文件，启动时清理旧 WAV。
 - 自包含安装包：普通用户下载 `CodexVoiceInput-Setup.exe` 即可安装。
 
+## 为什么选择 Codex 语音转文字
+
+Codex Voice Input 的核心卖点不是“又一个录音按钮”，而是把 Codex 背后的转写能力变成一个随叫随到的 Windows 输入入口。你不用在不同软件之间复制粘贴，也不用先打开网页、上传音频、等待结果；只要光标在输入框里，按下快捷键，说话，文字就能进入当前工作流。
+
+Codex 转写特别适合日常真实输入场景：
+
+- 多语言自动匹配：中文、英文、中英混合、技术词、产品名和代码相关表达可以自动识别，不需要手动选择语言。
+- 口语转文字更自然：适合长句、自然停顿和连续表达，比传统命令式语音输入更接近“直接说想法”。
+- 适合创作和编程语境：写需求、写注释、写 README、写提交说明、写聊天回复，都能保留比较自然的表达。
+- 不打断当前窗口：悬浮胶囊常驻桌面，录音、识别、复制、输入都在一个轻量浮层里完成。
+- 不需要 OpenAI API Key：复用本机 Codex 登录，把 Codex 用户已经拥有的能力直接变成桌面生产力工具。
+- 自动识别输入结果：识别完成后先预览，可以一键输入，也可以复制文本，避免错误内容直接冲进当前输入框。
+- 轻量但完整：全局快捷键、托盘、麦克风选择、历史记录、贴边隐藏、深色模式、自动清理录音都已经内置。
+
+一句话：它把 Codex 的语音转文字能力从“隐藏在某个应用里的功能”变成“Windows 系统级的语音输入体验”。
+
 ## 下载与安装
 
 ### 方法一：下载安装包
@@ -233,6 +249,19 @@ Codex Voice Input is an unofficial Windows voice typing and speech-to-text app f
 - Reuses the local Codex Desktop or Codex CLI login.
 - Works as a lightweight floating dictation capsule.
 - Supports result preview, copy, history, global hotkey, tray menu, microphone selection, and edge docking.
+
+## What Makes Codex Transcription Useful?
+
+Codex Voice Input is designed for real daily dictation, not just demo audio transcription. It brings Codex-style speech recognition into the active Windows app, so you can speak directly into documents, chats, browsers, editors, issue trackers, terminals, and IDEs.
+
+- Automatic multilingual recognition: Chinese, English, mixed Chinese-English speech, technical terms, product names, and coding-related phrases can be detected without picking a language first.
+- Natural long-form dictation: speak full thoughts, notes, replies, requirements, or documentation instead of short voice commands.
+- Codex-friendly technical context: useful for code comments, README drafts, commit messages, bug reports, and developer notes.
+- No OpenAI API key setup: it reuses the local Codex login already present on your Windows machine.
+- Preview before typing: review the transcription, type it into the current field, or copy it for later.
+- System-wide workflow: the floating capsule stays out of the way while still being one hotkey away.
+
+In short, Codex Voice Input turns Codex transcription into a practical Windows voice typing layer.
 
 ## Download
 
