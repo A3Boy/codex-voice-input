@@ -1,167 +1,284 @@
 <p align="center">
-  <img src="./src/VoiceInput.App/Assets/codex-voice-input.png" width="220" alt="Codex Voice Input icon">
+  <img src="./src/VoiceInput.App/Assets/codex-voice-input.png" width="190" alt="Codex Voice Input - Windows Codex voice typing and speech to text app icon">
 </p>
 
 <h1 align="center">Codex Voice Input</h1>
 
 <p align="center">
-  Windows 原生浮动语音输入工具，复用本机 Codex 登录进行语音转文字。
+  Windows 语音输入工具 / Codex 语音转文字输入法 / ChatGPT speech-to-text dictation for any Windows text box.
 </p>
 
 <p align="center">
-  <a href="https://github.com/A3Boy/codex-voice-input/releases/latest"><img src="https://img.shields.io/github/v/release/A3Boy/codex-voice-input?logo=github" alt="Latest release"></a>
-  <a href="https://github.com/A3Boy/codex-voice-input/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/A3Boy/codex-voice-input/build.yml?branch=main&label=build" alt="Build"></a>
-  <a href="https://github.com/A3Boy/codex-voice-input/actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/A3Boy/codex-voice-input/release.yml?label=release" alt="Release"></a>
+  <a href="https://github.com/A3Boy/codex-voice-input/releases/latest"><img src="https://img.shields.io/github/v/release/A3Boy/codex-voice-input?logo=github" alt="Latest Codex Voice Input release"></a>
+  <a href="https://github.com/A3Boy/codex-voice-input/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/A3Boy/codex-voice-input/build.yml?branch=main&label=build" alt="Codex Voice Input build status"></a>
+  <a href="https://github.com/A3Boy/codex-voice-input/actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/A3Boy/codex-voice-input/release.yml?label=release" alt="Codex Voice Input release status"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/github/license/A3Boy/codex-voice-input" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/platform-Windows%20x64-0078D4?logo=windows" alt="Windows x64">
+  <img src="https://img.shields.io/badge/platform-Windows%2010%2F11%20x64-0078D4?logo=windows" alt="Windows 10 and Windows 11 x64">
 </p>
 
 <p align="center">
-  <a href="#中文">中文</a> · <a href="#english">English</a>
+  <a href="#中文">中文</a> · <a href="#english">English</a> ·
+  <a href="https://github.com/A3Boy/codex-voice-input/releases/latest">Download</a>
 </p>
 
 > [!WARNING]
-> 非官方项目，与 OpenAI 无隶属、赞助或背书关系。项目使用逆向研究得到的 Codex Desktop 转写流程，不是公开稳定 API，可能随 Codex 更新而失效。
+> Codex Voice Input 是非官方项目，与 OpenAI 无隶属、赞助或背书关系。项目复用逆向研究得到的 Codex Desktop 转写流程，不是公开稳定 API；如果 Codex Desktop 的认证、请求头或转写端点改变，本项目可能需要跟随更新。
 
-## 界面预览
+## Search Keywords
+
+Codex Voice Input, Codex ASR, Codex speech to text, Codex voice typing, ChatGPT speech to text, ChatGPT voice input, Windows speech to text, Windows dictation app, Windows voice typing, 语音输入法, 语音转文字, Windows 语音输入, Codex 语音转文字, ChatGPT 语音输入, ChatGPT 语音转文字, 任意输入框语音输入, Windows 浮动语音输入工具。
+
+## Screenshots
 
 <p align="center">
-  <img src="./docs/screenshots/capsule-idle.png" width="46%" alt="待机状态">
-  <img src="./docs/screenshots/capsule-recording-active.png" width="46%" alt="真实麦克风音量驱动的录音波形">
+  <img src="./docs/screenshots/capsule-idle.png" width="46%" alt="Codex Voice Input idle floating capsule for Windows voice typing">
+  <img src="./docs/screenshots/capsule-recording-active.png" width="46%" alt="Codex Voice Input recording waveform driven by real microphone volume">
 </p>
 <p align="center">
-  <img src="./docs/screenshots/capsule-recording-silent.png" width="46%" alt="静音录音状态">
-  <img src="./docs/screenshots/capsule-result.png" width="46%" alt="识别结果与复制按钮">
+  <img src="./docs/screenshots/capsule-recording-silent.png" width="46%" alt="Codex Voice Input silent recording baseline state">
+  <img src="./docs/screenshots/capsule-result.png" width="46%" alt="Codex Voice Input recognition result preview and copy button">
 </p>
 
 # 中文
 
-Codex Desktop 会把语音录音发送到 `https://chatgpt.com/backend-api/transcribe` 并返回文本。Codex Voice Input 将这个流程实现为一个 Windows 浮动输入胶囊：按下全局快捷键开始录音，再次按下完成识别，然后把结果写入当前光标位置。
+Codex Voice Input 是一个 Windows 桌面语音输入工具。它读取本机 Codex Desktop / Codex CLI 的登录状态，录制麦克风音频，调用 Codex Desktop 使用的 ChatGPT 转写端点，把语音转成文字，然后输入到当前光标所在的输入框。
 
-## 适合谁用
+它适合想把 Codex 的语音转文字能力变成「Windows 任意输入框语音输入法」的人：写文档、写代码注释、发聊天消息、记笔记、填网页表单，都可以通过全局快捷键快速录音、识别、输入。
 
-- 已在 Codex Desktop 或 Codex CLI 登录 ChatGPT
-- 希望在任意 Windows 输入框中使用 Codex 语音转文字
-- 不想配置 OpenAI API Key 或单独购买转写 API
-- 接受逆向接口可能变化，需要跟随 Codex 更新
+## 核心特性
 
-## 安装
+- Windows 全局语音输入：在浏览器、微信、编辑器、笔记软件、IDE、文档里都可以使用。
+- 复用 Codex 登录：读取 `%USERPROFILE%\.codex\auth.json`，不需要单独配置 OpenAI API Key。
+- Codex 自动语言识别：中文、英文和混合语言由 Codex 转写端点自动判断。
+- 浮动胶囊 UI：轻量置顶、可拖动、可贴边隐藏，适合长期驻留。
+- 实时录音状态：麦克风音量驱动的动态波形，静音时显示基线。
+- 识别结果预览：可以确认后输入，也可以复制识别文本。
+- 识别历史：保留最近结果，方便回看和复制。
+- 全局快捷键：默认 `Ctrl+Alt+Space`，支持在设置中修改。
+- 单实例运行：避免多个托盘图标、多个快捷键监听和历史文件竞争。
+- 自动清理临时录音：识别完成、失败、取消后删除录音文件，启动时清理旧 WAV。
+- 自包含安装包：普通用户下载 `CodexVoiceInput-Setup.exe` 即可安装。
 
-### 一键安装（推荐）
+## 下载与安装
 
-从 [最新 GitHub Release](https://github.com/A3Boy/codex-voice-input/releases/latest) 下载 `CodexVoiceInput-Setup.exe`，双击后按提示安装。安装包已经包含 .NET 8 和 Windows App SDK 运行组件，会自动创建开始菜单和桌面快捷方式。
+### 方法一：下载安装包
 
-### PowerShell 一行安装
+前往 [Latest Release](https://github.com/A3Boy/codex-voice-input/releases/latest)，下载：
+
+- `CodexVoiceInput-Setup.exe`：推荐，傻瓜式安装，创建开始菜单和桌面快捷方式。
+- `CodexVoiceInput-win-x64.zip`：便携版，解压后运行 `CodexVoiceInput.exe`。
+
+安装包和便携版都已经包含 .NET 8 与 Windows App SDK 运行组件，不需要用户额外安装运行时。
+
+### 方法二：PowerShell 一行安装
 
 ```powershell
 powershell -ExecutionPolicy Bypass -c "irm https://github.com/A3Boy/codex-voice-input/releases/latest/download/install.ps1 | iex"
 ```
 
-安装脚本会下载 Windows x64 ZIP、校验 `SHA256SUMS.txt`，安装到 `%LOCALAPPDATA%\Programs\CodexVoiceInput`，创建桌面快捷方式并启动应用。
+安装脚本会下载 Windows x64 便携包，按 `SHA256SUMS.txt` 校验 ZIP 的 SHA-256，然后安装到：
 
-### 便携版
+```text
+%LOCALAPPDATA%\Programs\CodexVoiceInput
+```
 
-从 [最新 GitHub Release](https://github.com/A3Boy/codex-voice-input/releases/latest) 下载 `CodexVoiceInput-win-x64.zip`，解压后运行 `CodexVoiceInput.exe`。
+## 快速开始
 
-## 快速上手
+1. 安装并登录 Codex Desktop 或 Codex CLI。
+2. 确认本机存在 `%USERPROFILE%\.codex\auth.json`。
+3. 启动 Codex Voice Input。
+4. 按 `Ctrl+Alt+Space` 开始录音。
+5. 再按一次 `Ctrl+Alt+Space` 停止录音并转写。
+6. 点击识别结果输入到当前焦点，或点击复制按钮复制文本。
 
-1. 安装并登录 Codex Desktop/CLI，确认 `%USERPROFILE%\.codex\auth.json` 存在。
-2. 启动 Codex Voice Input。
-3. 按 `Ctrl+Alt+Space` 开始录音，再按一次停止并转写。
-4. 预览识别结果后点击输入，或点击复制按钮。
+## 常见使用场景
 
-设置页可以即时切换麦克风、全局快捷键和深色模式。快捷键必须包含至少一个修饰键和一个普通按键，例如 `Ctrl+Alt+K`。
+- Windows 语音输入法：在任意输入框中语音输入中文、英文或中英混合内容。
+- ChatGPT 语音转文字：复用 Codex 登录，不单独购买官方转写 API。
+- 写作与笔记：把口述内容快速转成文本，再进入编辑器整理。
+- 编程辅助：口述注释、提交说明、需求说明、测试步骤。
+- 即时聊天：在聊天软件、网页输入框和工单系统中快速输入长文本。
 
-## 功能
+## 工作原理
 
-- WinUI 3 + Win32 透明分层胶囊窗口
-- 实时麦克风音量驱动的多层动态波形
-- Codex 自动语言识别，无需 OpenAI API Key
-- 识别结果预览、复制、历史记录与当前焦点输入
-- 左右屏幕边缘吸附和竖向折叠
-- 麦克风与全局快捷键即时切换
-- 完成、失败或取消后自动删除临时录音
-- 深色模式、托盘菜单和开机启动脚本
+Codex Desktop 会把录音发送到 ChatGPT 后端转写端点并返回文本。Codex Voice Input 将这个流程包装成一个 Windows 桌面输入工具：
 
-## 认证模型与隐私
+1. 读取本机 Codex 登录令牌。
+2. 使用 Windows 麦克风录制 WAV 音频。
+3. 请求 `https://chatgpt.com/backend-api/transcribe`。
+4. 显示识别结果。
+5. 通过 Win32 输入模拟把文本写入当前焦点。
 
-应用默认读取 `%USERPROFILE%\.codex\auth.json` 中当前用户的 Codex 登录令牌，并直接向 ChatGPT 转写端点发送录音。
+本项目参考并致谢 [Wangnov/codex-asr](https://github.com/Wangnov/codex-asr) 对 Codex 转写流程的研究。Codex Voice Input 不是 `codex-asr` 的包装器；桌面应用、UI、录音、快捷键、历史、输入和请求逻辑使用 C# 独立实现。
 
-- 不会把令牌复制到应用配置、日志、历史或 Release 包
-- 不会把录音发送到项目作者控制的服务器
-- 临时 WAV 在完成、失败或取消后自动删除
-- 不要在 Issue 中上传 `auth.json`、个人录音或未经清理的日志
+## 隐私与安全
 
-完整说明见 [SECURITY.md](SECURITY.md)。
+Codex Voice Input 不运营中转服务器，不把录音或令牌发送给项目作者。
 
-## 已知边界
+- Codex 登录令牌只从本机 `%USERPROFILE%\.codex\auth.json` 读取。
+- 录音只发送到 ChatGPT 转写端点。
+- 临时 WAV 文件会在完成、失败或取消后自动删除。
+- 识别历史保存在本机 `%LOCALAPPDATA%\CodexVoiceInput\history.json`。
+- 日志保存在本机，且会限制大小，避免无限增长。
+- 不要在 Issue 中上传 `auth.json`、私人录音、识别历史或未经清理的日志。
 
-- 仅支持 Windows 10 2004+ / Windows 11 x64
-- 一键安装版和便携版均自带 .NET 8 运行时
-- 需要本机有效的 Codex 登录与可用订阅
-- 转写端点、认证格式或请求头可能无预告变化
-- 当前不是完整 TSF 输入法，文本通过 Win32 `SendInput` 写入当前焦点
+更多安全边界见 [SECURITY.md](SECURITY.md)。
+
+## 系统要求
+
+- Windows 10 2004+ 或 Windows 11
+- x64 设备
+- 可用麦克风
+- 本机已登录 Codex Desktop 或 Codex CLI
+- 当前 Codex 订阅可以访问 Codex 转写能力
+- 网络可以访问 `chatgpt.com`
+
+## 已知限制
+
+- 这是非官方逆向项目，不是 OpenAI 官方 API。
+- Codex 转写端点可能变化，接口失效时需要跟随上游修复。
+- 当前不是完整 TSF 输入法，输入文本依赖 Win32 `SendInput`。
+- 某些管理员权限窗口、安全桌面或特殊输入控件可能无法注入文本。
+- 目前只支持 Windows x64。
+
+## 本地文件位置
+
+```text
+配置文件：%LOCALAPPDATA%\CodexVoiceInput\config.json
+识别历史：%LOCALAPPDATA%\CodexVoiceInput\history.json
+日志文件：%LOCALAPPDATA%\CodexVoiceInput\codex-voice-input.log
+临时录音：%TEMP%\CodexVoiceInput
+安装目录：%LOCALAPPDATA%\Programs\CodexVoiceInput
+```
 
 ## 从源码构建
 
-需要 Visual Studio 2022 或 Build Tools，安装 `.NET desktop development`、Windows SDK 和 .NET 8 SDK。
+需要 Visual Studio 2022 或 Build Tools，并安装：
+
+- .NET desktop development workload
+- Windows SDK
+- .NET 8 SDK
+
+构建和运行：
 
 ```powershell
 .\build.ps1 -Configuration Debug
 .\run.ps1
 ```
 
-运行测试与打包：
+运行测试：
 
 ```powershell
 dotnet run --project .\tests\HotkeyContract\HotkeyContract.csproj
+dotnet run --project .\tests\TextPostProcessorContract\TextPostProcessorContract.csproj
+dotnet run --project .\tests\ClipboardContract\ClipboardContract.csproj
 Get-ChildItem .\scripts\test-*-contract.ps1 | ForEach-Object { & $_.FullName }
+```
+
+打包：
+
+```powershell
 .\package.ps1
 ```
 
-本地数据：
+## FAQ
 
-- 配置：`%LOCALAPPDATA%\CodexVoiceInput\config.json`
-- 识别历史：`%LOCALAPPDATA%\CodexVoiceInput\history.json`
-- 日志：`%LOCALAPPDATA%\CodexVoiceInput\codex-voice-input.log`
-- 临时录音：`%TEMP%\CodexVoiceInput`
+### 这是 OpenAI 官方项目吗？
 
-## 技术来源
+不是。Codex Voice Input 是非官方开源项目，与 OpenAI 无隶属、赞助或背书关系。
 
-认证与转写技术路线参考并致谢 [Wangnov/codex-asr](https://github.com/Wangnov/codex-asr)。本项目不是 Rust 包装器，也不依赖 `codex-asr` 可执行文件；桌面应用和请求逻辑使用 C# 独立实现。许可证信息见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+### 需要 OpenAI API Key 吗？
+
+不需要。项目复用本机 Codex 登录状态，不走官方 OpenAI API 转写路径。
+
+### 为什么叫 Codex 逆向语音输入？
+
+因为项目目标就是复用 Codex Desktop 的逆向转写接口，把它做成 Windows 语音输入工具。接口失效时，本项目会尽量跟随 Codex Desktop 更新，但不承诺长期稳定。
+
+### 别的电脑能用吗？
+
+可以，但需要满足 Windows x64、已安装应用、已在该电脑登录 Codex Desktop 或 Codex CLI，并且订阅可用。登录状态不会随安装包迁移。
+
+### 录音文件会保留吗？
+
+正常流程不会长期保留。识别完成、失败或取消后会自动删除当前录音；应用启动时也会清理旧临时 WAV。
+
+## Roadmap
+
+- 更稳定的第二次启动唤醒体验
+- 更清晰的错误提示与恢复建议
+- 更完善的截图和演示 GIF
+- 更轻量的发布包体积
+
+## 致谢
+
+- [Wangnov/codex-asr](https://github.com/Wangnov/codex-asr)：Codex ASR 逆向研究参考。
+- [NAudio](https://github.com/naudio/NAudio)：Windows 麦克风录音。
+- Microsoft WinUI 3 / Windows App SDK：桌面 UI 与 Windows 集成。
+
+## License
+
+[MIT](LICENSE). Third-party notices are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ---
 
 # English
 
-Codex Voice Input is an unofficial Windows floating voice-input capsule. It reuses the current user's local Codex authentication, records microphone audio, calls the reverse-engineered Codex Desktop transcription endpoint, previews the result, and types it into the currently focused control.
+Codex Voice Input is an unofficial Windows voice typing and speech-to-text app for Codex users. It turns the reverse-engineered Codex Desktop transcription flow into a floating Windows dictation capsule: press a global hotkey, record your microphone, transcribe speech with the Codex / ChatGPT transcription endpoint, preview the text, and type it into the currently focused input box.
 
-## Requirements
+## Why Use Codex Voice Input?
 
-- Windows 10 2004+ or Windows 11 x64
-- A local Codex Desktop/CLI login at `%USERPROFILE%\.codex\auth.json`
-- An eligible Codex subscription and network access to `chatgpt.com`
+- Windows speech to text for any text box.
+- ChatGPT / Codex voice typing without configuring an OpenAI API key.
+- Reuses the local Codex Desktop or Codex CLI login.
+- Works as a lightweight floating dictation capsule.
+- Supports result preview, copy, history, global hotkey, tray menu, microphone selection, and edge docking.
 
-## Install
+## Download
 
-Download `CodexVoiceInput-Setup.exe` from the [latest release](https://github.com/A3Boy/codex-voice-input/releases/latest) and run it. The installer and portable ZIP are self-contained; no separate .NET runtime installation is required.
+Download the latest Windows release:
 
-Alternatively, use the verified PowerShell installer:
+[https://github.com/A3Boy/codex-voice-input/releases/latest](https://github.com/A3Boy/codex-voice-input/releases/latest)
+
+Recommended asset:
+
+- `CodexVoiceInput-Setup.exe` for a normal desktop installation.
+- `CodexVoiceInput-win-x64.zip` for portable usage.
+
+Verified PowerShell installer:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -c "irm https://github.com/A3Boy/codex-voice-input/releases/latest/download/install.ps1 | iex"
 ```
 
-The installer verifies the release SHA-256 checksum before replacing `%LOCALAPPDATA%\Programs\CodexVoiceInput`.
+## Requirements
 
-## Security boundary
+- Windows 10 2004+ or Windows 11 x64
+- A working microphone
+- Local Codex Desktop or Codex CLI authentication at `%USERPROFILE%\.codex\auth.json`
+- A Codex subscription that can access the transcription flow
+- Network access to `chatgpt.com`
 
-Authentication stays on the local machine and is sent only to the ChatGPT transcription endpoint. The project does not operate a relay server. Never attach Codex auth files, private audio, recognition history, or raw logs to GitHub issues.
+## How It Works
+
+1. Reads the local Codex authentication file.
+2. Records microphone audio on Windows.
+3. Sends the WAV audio to `https://chatgpt.com/backend-api/transcribe`.
+4. Shows a transcription preview.
+5. Types the recognized text into the active Windows input field with Win32 input simulation.
+
+This project is inspired by the Codex ASR research in [Wangnov/codex-asr](https://github.com/Wangnov/codex-asr), but it is not a Rust wrapper and does not call the `codex-asr` executable. The Windows application is implemented independently in C#.
+
+## Security and Privacy
+
+Codex Voice Input does not run a relay server. Authentication and history stay on your machine, and audio is sent directly to the ChatGPT transcription endpoint.
+
+Do not upload Codex auth files, private audio, recognition history, or raw logs to GitHub issues. See [SECURITY.md](SECURITY.md).
 
 ## Disclaimer
 
-This is not an official OpenAI API or product. The endpoint and authentication behavior can change without notice. Codex Voice Input is not affiliated with, endorsed by, or sponsored by OpenAI.
+This is not an official OpenAI product or API. It is not affiliated with, endorsed by, or sponsored by OpenAI. The reverse-engineered endpoint can change without notice.
 
 ## License
 
-[MIT](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for upstream attribution.
+[MIT](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for attribution.
