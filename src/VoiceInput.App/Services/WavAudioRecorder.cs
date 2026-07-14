@@ -16,6 +16,7 @@ public sealed class WavAudioRecorder : IDisposable
     {
         tempDirectory = Path.Combine(Path.GetTempPath(), "CodexVoiceInput");
         Directory.CreateDirectory(tempDirectory);
+        CleanupStaleRecordings(tempDirectory);
         this.deviceNumber = deviceNumber;
     }
 
@@ -92,6 +93,31 @@ public sealed class WavAudioRecorder : IDisposable
         }
 
         return devices;
+    }
+
+    public static void CleanupStaleRecordings(string? directory = null)
+    {
+        var targetDirectory = directory ?? Path.Combine(Path.GetTempPath(), "CodexVoiceInput");
+        if (!Directory.Exists(targetDirectory))
+        {
+            return;
+        }
+
+        var cutoff = DateTime.UtcNow.AddDays(-1);
+        foreach (var path in Directory.EnumerateFiles(targetDirectory, "voice-*.wav"))
+        {
+            try
+            {
+                if (File.GetLastWriteTimeUtc(path) < cutoff)
+                {
+                    File.Delete(path);
+                }
+            }
+            catch
+            {
+                // A locked or inaccessible stale file can be retried on the next launch.
+            }
+        }
     }
 
     public void DeleteCurrentFile()

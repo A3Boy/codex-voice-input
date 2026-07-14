@@ -8,10 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodexVoiceInput.Core", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodexVoiceInput.Protocol", "src\VoiceInput.Protocol\VoiceInput.Protocol.csproj", "{3B11943E-6E95-4D2D-8069-F11EBA0AF049}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodexVoiceInput.Native", "src\VoiceInput.Native\VoiceInput.Native.vcxproj", "{9D0643BD-927B-488A-8AE8-2D7E2D173736}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodexVoiceInput.Tsf", "src\VoiceInput.Tsf\VoiceInput.Tsf.vcxproj", "{C6D19B11-B9F3-4B39-B20A-52CC182C61A8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -30,14 +26,6 @@ Global
 		{3B11943E-6E95-4D2D-8069-F11EBA0AF049}.Debug|x64.Build.0 = Debug|x64
 		{3B11943E-6E95-4D2D-8069-F11EBA0AF049}.Release|x64.ActiveCfg = Release|x64
 		{3B11943E-6E95-4D2D-8069-F11EBA0AF049}.Release|x64.Build.0 = Release|x64
-		{9D0643BD-927B-488A-8AE8-2D7E2D173736}.Debug|x64.ActiveCfg = Debug|x64
-		{9D0643BD-927B-488A-8AE8-2D7E2D173736}.Debug|x64.Build.0 = Debug|x64
-		{9D0643BD-927B-488A-8AE8-2D7E2D173736}.Release|x64.ActiveCfg = Release|x64
-		{9D0643BD-927B-488A-8AE8-2D7E2D173736}.Release|x64.Build.0 = Release|x64
-		{C6D19B11-B9F3-4B39-B20A-52CC182C61A8}.Debug|x64.ActiveCfg = Debug|x64
-		{C6D19B11-B9F3-4B39-B20A-52CC182C61A8}.Debug|x64.Build.0 = Debug|x64
-		{C6D19B11-B9F3-4B39-B20A-52CC182C61A8}.Release|x64.ActiveCfg = Release|x64
-		{C6D19B11-B9F3-4B39-B20A-52CC182C61A8}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@ namespace VoiceInput.App.Services;
 
 public static class AppDiagnostics
 {
+    private const long MaxLogBytes = 5 * 1024 * 1024;
     private static readonly object Lock = new();
     private static readonly string LogDirectory =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CodexVoiceInput");
@@ -20,7 +21,15 @@ public static class AppDiagnostics
             Directory.CreateDirectory(LogDirectory);
             lock (Lock)
             {
-                File.AppendAllText(LogPath, $"{DateTimeOffset.Now:O} [{level}] {message}{Environment.NewLine}");
+                var line = $"{DateTimeOffset.Now:O} [{level}] {message}{Environment.NewLine}";
+                if (File.Exists(LogPath) && new FileInfo(LogPath).Length >= MaxLogBytes)
+                {
+                    File.WriteAllText(LogPath, line);
+                }
+                else
+                {
+                    File.AppendAllText(LogPath, line);
+                }
             }
         }
         catch

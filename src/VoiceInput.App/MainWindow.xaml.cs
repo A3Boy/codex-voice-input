@@ -3,7 +3,6 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using System.Runtime.InteropServices;
-using Windows.ApplicationModel.DataTransfer;
 using VoiceInput.App.Services;
 using VoiceInput.Core.Capsule;
 using VoiceInput.Core.Recognition;
@@ -594,10 +593,11 @@ public sealed partial class MainWindow : Window, IDisposable
             return;
         }
 
-        var content = new DataPackage();
-        content.SetText(text);
-        Clipboard.SetContent(content);
-        Clipboard.Flush();
+        if (!ClipboardService.TrySetText(text, out var error))
+        {
+            AppDiagnostics.Info($"Recognition text copy failed: {error}");
+            return;
+        }
         capsuleWindow.ShowCopyConfirmation();
         AppDiagnostics.Info($"Recognition text copied. length={text.Length}");
     }

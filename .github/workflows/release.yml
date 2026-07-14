@@ -1,6 +1,7 @@
 name: release
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v*.*.*"
@@ -19,18 +20,35 @@ jobs:
       - name: Test hotkey parsing
         shell: pwsh
         run: dotnet run --project .\tests\HotkeyContract\HotkeyContract.csproj
+      - name: Test text post-processing
+        shell: pwsh
+        run: dotnet run --project .\tests\TextPostProcessorContract\TextPostProcessorContract.csproj
+      - name: Test clipboard round trip
+        shell: pwsh
+        run: dotnet run --project .\tests\ClipboardContract\ClipboardContract.csproj
       - name: Run source contracts
         shell: pwsh
         run: Get-ChildItem .\scripts\test-*-contract.ps1 | ForEach-Object { & $_.FullName }
       - name: Build portable package
         shell: pwsh
         run: .\package.ps1 -SkipDesktopShortcut -SkipLaunch -SkipVerification
+      - name: Build one-click installer
+        shell: pwsh
+        run: |
+          choco install innosetup --yes --no-progress
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" .\installer\CodexVoiceInput.iss
       - name: Create checksums
         shell: pwsh
         run: |
-          $asset = ".\dist\CodexVoiceInput-win-x64.zip"
-          $hash = (Get-FileHash -Algorithm SHA256 $asset).Hash.ToLowerInvariant()
-          "$hash  CodexVoiceInput-win-x64.zip" | Set-Content -Encoding ascii .\dist\SHA256SUMS.txt
+          $assets = @(
+            ".\dist\CodexVoiceInput-Setup.exe",
+            ".\dist\CodexVoiceInput-win-x64.zip"
+          )
+          $lines = foreach ($asset in $assets) {
+            $hash = (Get-FileHash -Algorithm SHA256 $asset).Hash.ToLowerInvariant()
+            "$hash  $([IO.Path]::GetFileName($asset))"
+          }
+          $lines | Set-Content -Encoding ascii .\dist\SHA256SUMS.txt
           Copy-Item .\install.ps1 .\dist\install.ps1
       - name: Publish GitHub Release
         shell: pwsh
@@ -38,6 +56,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ github.ref_name }}" `
+            .\dist\CodexVoiceInput-Setup.exe `
             .\dist\CodexVoiceInput-win-x64.zip `
             .\dist\SHA256SUMS.txt `
             .\dist\install.ps1 `

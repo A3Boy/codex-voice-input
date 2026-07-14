@@ -11,7 +11,7 @@ $publishDir = Join-Path $distRoot "CodexVoiceInput"
 $zipPath = Join-Path $distRoot "CodexVoiceInput-win-x64.zip"
 $programsRoot = Join-Path $env:LOCALAPPDATA "Programs"
 $installDir = Join-Path $programsRoot "CodexVoiceInput"
-$buildOutput = Join-Path $root "src\VoiceInput.App\bin\x64\Release\net8.0-windows10.0.19041.0"
+$buildOutput = Join-Path $root "src\VoiceInput.App\bin\x64\Release\net8.0-windows10.0.19041.0\win-x64"
 
 function Reset-Directory([string] $Path, [string] $AllowedRoot) {
     $fullPath = [IO.Path]::GetFullPath($Path)
@@ -38,7 +38,7 @@ foreach ($requiredFile in @("CodexVoiceInput.exe", "App.xbf", "MainWindow.xbf", 
         throw "Release output is incomplete. Missing: $requiredFile"
     }
 }
-Get-ChildItem -LiteralPath $buildOutput | Where-Object { $_.Name -ne "win-x64" } | Copy-Item -Destination $publishDir -Recurse -Force
+Get-ChildItem -LiteralPath $buildOutput | Copy-Item -Destination $publishDir -Recurse -Force
 
 $publishedExe = Join-Path $publishDir "CodexVoiceInput.exe"
 if (-not (Test-Path -LiteralPath $publishedExe)) {

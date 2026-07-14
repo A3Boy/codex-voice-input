@@ -9,6 +9,7 @@ public sealed class GlobalHotkey : IDisposable
     private const int HotkeyId = 0x5649;
     private const int WmHotkey = 0x0312;
     private const int WmQuit = 0x0012;
+    private const uint ModNoRepeat = 0x4000;
 
     private readonly DispatcherQueue dispatcher;
     private readonly HotkeyDefinition hotkey;
@@ -71,7 +72,7 @@ public sealed class GlobalHotkey : IDisposable
         threadId = GetCurrentThreadId();
         _ = PeekMessage(out _, 0, 0, 0, 0);
 
-        if (!RegisterHotKey(0, HotkeyId, hotkey.Modifiers, hotkey.VirtualKey))
+        if (!RegisterHotKey(0, HotkeyId, hotkey.Modifiers | ModNoRepeat, hotkey.VirtualKey))
         {
             startupError = new InvalidOperationException($"Failed to register {hotkey.Display} hotkey.");
             ready.Set();

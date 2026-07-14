@@ -10,7 +10,7 @@ $failures = [System.Collections.Generic.List[string]]::new()
 if ($history -notmatch 'history\.json' -or $history -notmatch 'MaximumEntries = 200') {
     $failures.Add("recognition history must persist locally with a bounded entry count")
 }
-if ($window -notmatch 'historyStore\.Add' -or $window -notmatch 'Clipboard\.SetContent') {
+if ($window -notmatch 'historyStore\.Add' -or $window -notmatch 'ClipboardService\.TrySetText') {
     $failures.Add("completed recognition must enter history and support clipboard copy")
 }
 if ($capsule -notmatch 'ShowCopyConfirmation' -or $settings -notmatch 'HistoryList') {

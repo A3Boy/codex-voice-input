@@ -63,8 +63,7 @@ public sealed class CodexAsrRecognitionEngine : IRecognitionEngine
         var body = await response.Content.ReadAsStringAsync(cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
-            throw new InvalidOperationException(
-                $"Codex 转写请求失败（HTTP {(int)response.StatusCode}）：{Clip(body)}");
+            throw new InvalidOperationException(CreateHttpErrorMessage(response.StatusCode));
         }
 
         CodexAsrJson? parsed;
@@ -84,6 +83,16 @@ public sealed class CodexAsrRecognitionEngine : IRecognitionEngine
         }
 
         return new RecognitionResult(text);
+    }
+
+    private static string CreateHttpErrorMessage(HttpStatusCode statusCode)
+    {
+        return statusCode switch
+        {
+            HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden => "Codex 登录已失效，请重新登录",
+            HttpStatusCode.TooManyRequests => "请求过于频繁，请稍后重试",
+            _ => $"转写失败：HTTP {(int)statusCode}",
+        };
     }
 
     private static HttpClient CreateHttpClient()

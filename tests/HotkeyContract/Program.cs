@@ -4,6 +4,15 @@ if (HotkeyDefinition.TryParse("Ctrl+Alt", out _, out var modifierOnlyError))
 {
     throw new InvalidOperationException("Modifier-only shortcuts must be rejected.");
 }
+
+if (HotkeyDefinition.TryParse("Ctrl+A+B", out _, out var multipleKeyError))
+{
+    throw new InvalidOperationException("Multiple ordinary keys must be rejected.");
+}
+if (!multipleKeyError.Contains("一个普通按键", StringComparison.Ordinal))
+{
+    throw new InvalidOperationException($"Unexpected multiple-key error: {multipleKeyError}");
+}
 if (!modifierOnlyError.Contains("普通按键", StringComparison.Ordinal))
 {
     throw new InvalidOperationException("Modifier-only validation must explain that a trigger key is required.");

@@ -19,6 +19,12 @@ jobs:
       - name: Test hotkey parsing
         shell: pwsh
         run: dotnet run --project .\tests\HotkeyContract\HotkeyContract.csproj
+      - name: Test text post-processing
+        shell: pwsh
+        run: dotnet run --project .\tests\TextPostProcessorContract\TextPostProcessorContract.csproj
+      - name: Test clipboard round trip
+        shell: pwsh
+        run: dotnet run --project .\tests\ClipboardContract\ClipboardContract.csproj
       - name: Run source contracts
         shell: pwsh
         run: Get-ChildItem .\scripts\test-*-contract.ps1 | ForEach-Object { & $_.FullName }

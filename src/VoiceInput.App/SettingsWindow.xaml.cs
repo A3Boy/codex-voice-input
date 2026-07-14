@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using VoiceInput.App.Services;
-using Windows.ApplicationModel.DataTransfer;
 using WinRT.Interop;
 
 namespace VoiceInput.App;
@@ -133,10 +132,10 @@ public sealed partial class SettingsWindow : Window
             return;
         }
 
-        var content = new DataPackage();
-        content.SetText(text);
-        Clipboard.SetContent(content);
-        Clipboard.Flush();
+        if (!ClipboardService.TrySetText(text, out var error))
+        {
+            StatusText.Text = $"复制失败：{error}";
+        }
     }
 
     private void ClearHistory_Click(object sender, RoutedEventArgs e)

@@ -47,17 +47,32 @@ public sealed record HotkeyDefinition(uint Modifiers, uint VirtualKey, string Di
                     modifiers |= 0x0008;
                     break;
                 case "space":
+                    if (key is not null)
+                    {
+                        error = "快捷键只能包含一个普通按键。";
+                        return false;
+                    }
                     key = 0x20;
                     keyDisplay = "Space";
                     break;
                 default:
                     if (part.Length == 1 && char.IsLetterOrDigit(part[0]))
                     {
+                        if (key is not null)
+                        {
+                            error = "快捷键只能包含一个普通按键。";
+                            return false;
+                        }
                         key = char.ToUpperInvariant(part[0]);
                         keyDisplay = part.ToUpperInvariant();
                     }
                     else if (part.StartsWith('f') && int.TryParse(part[1..], out var fKey) && fKey is >= 1 and <= 24)
                     {
+                        if (key is not null)
+                        {
+                            error = "快捷键只能包含一个普通按键。";
+                            return false;
+                        }
                         key = (uint)(0x70 + fKey - 1);
                         keyDisplay = $"F{fKey}";
                     }

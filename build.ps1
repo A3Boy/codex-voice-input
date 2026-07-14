@@ -19,7 +19,7 @@ if (-not $msbuild) {
     }
 }
 if (-not $msbuild) {
-    throw "MSBuild was not found. Install Visual Studio 2022 or Build Tools with .NET desktop and C++ workloads."
+    throw "MSBuild was not found. Install Visual Studio 2022 or Build Tools with the .NET desktop workload."
 }
 
 & $msbuild (Join-Path $root "CodexVoiceInput.sln") `

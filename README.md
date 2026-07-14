@@ -23,6 +23,17 @@
 > [!WARNING]
 > 非官方项目，与 OpenAI 无隶属、赞助或背书关系。项目使用逆向研究得到的 Codex Desktop 转写流程，不是公开稳定 API，可能随 Codex 更新而失效。
 
+## 界面预览
+
+<p align="center">
+  <img src="./docs/screenshots/capsule-idle.png" width="46%" alt="待机状态">
+  <img src="./docs/screenshots/capsule-recording-active.png" width="46%" alt="真实麦克风音量驱动的录音波形">
+</p>
+<p align="center">
+  <img src="./docs/screenshots/capsule-recording-silent.png" width="46%" alt="静音录音状态">
+  <img src="./docs/screenshots/capsule-result.png" width="46%" alt="识别结果与复制按钮">
+</p>
+
 # 中文
 
 Codex Desktop 会把语音录音发送到 `https://chatgpt.com/backend-api/transcribe` 并返回文本。Codex Voice Input 将这个流程实现为一个 Windows 浮动输入胶囊：按下全局快捷键开始录音，再次按下完成识别，然后把结果写入当前光标位置。
@@ -36,6 +47,10 @@ Codex Desktop 会把语音录音发送到 `https://chatgpt.com/backend-api/trans
 
 ## 安装
 
+### 一键安装（推荐）
+
+从 [最新 GitHub Release](https://github.com/A3Boy/codex-voice-input/releases/latest) 下载 `CodexVoiceInput-Setup.exe`，双击后按提示安装。安装包已经包含 .NET 8 和 Windows App SDK 运行组件，会自动创建开始菜单和桌面快捷方式。
+
 ### PowerShell 一行安装
 
 ```powershell
@@ -44,7 +59,7 @@ powershell -ExecutionPolicy Bypass -c "irm https://github.com/A3Boy/codex-voice-
 
 安装脚本会下载 Windows x64 ZIP、校验 `SHA256SUMS.txt`，安装到 `%LOCALAPPDATA%\Programs\CodexVoiceInput`，创建桌面快捷方式并启动应用。
 
-### 直接下载
+### 便携版
 
 从 [最新 GitHub Release](https://github.com/A3Boy/codex-voice-input/releases/latest) 下载 `CodexVoiceInput-win-x64.zip`，解压后运行 `CodexVoiceInput.exe`。
 
@@ -82,14 +97,14 @@ powershell -ExecutionPolicy Bypass -c "irm https://github.com/A3Boy/codex-voice-
 ## 已知边界
 
 - 仅支持 Windows 10 2004+ / Windows 11 x64
-- 需要 .NET 8 Desktop Runtime
+- 一键安装版和便携版均自带 .NET 8 运行时
 - 需要本机有效的 Codex 登录与可用订阅
 - 转写端点、认证格式或请求头可能无预告变化
 - 当前不是完整 TSF 输入法，文本通过 Win32 `SendInput` 写入当前焦点
 
 ## 从源码构建
 
-需要 Visual Studio 2022 或 Build Tools，安装 `.NET desktop development`、`Desktop development with C++`、Windows SDK 和 .NET 8 SDK。
+需要 Visual Studio 2022 或 Build Tools，安装 `.NET desktop development`、Windows SDK 和 .NET 8 SDK。
 
 ```powershell
 .\build.ps1 -Configuration Debug
@@ -124,11 +139,14 @@ Codex Voice Input is an unofficial Windows floating voice-input capsule. It reus
 ## Requirements
 
 - Windows 10 2004+ or Windows 11 x64
-- .NET 8 Desktop Runtime
 - A local Codex Desktop/CLI login at `%USERPROFILE%\.codex\auth.json`
 - An eligible Codex subscription and network access to `chatgpt.com`
 
 ## Install
+
+Download `CodexVoiceInput-Setup.exe` from the [latest release](https://github.com/A3Boy/codex-voice-input/releases/latest) and run it. The installer and portable ZIP are self-contained; no separate .NET runtime installation is required.
+
+Alternatively, use the verified PowerShell installer:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -c "irm https://github.com/A3Boy/codex-voice-input/releases/latest/download/install.ps1 | iex"
