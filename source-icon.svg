@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2048" height="2048" viewBox="0 0 2048 2048" role="img" aria-labelledby="title desc">
+  <title id="title">Codex ASR application icon</title>
+  <desc id="desc">A soft white rounded-square application tile containing a blue-violet organic panel, code brackets, an audio waveform, and transcript lines.</desc>
+
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fbfbfd"/>
+    </linearGradient>
+
+    <linearGradient id="tileFill" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.58" stop-color="#fdfdff"/>
+      <stop offset="1" stop-color="#f5f6fb"/>
+    </linearGradient>
+
+    <linearGradient id="blobFill" x1="0.08" y1="0.82" x2="0.9" y2="0.08">
+      <stop offset="0" stop-color="#2269ff"/>
+      <stop offset="0.34" stop-color="#4f73ff"/>
+      <stop offset="0.66" stop-color="#836cf8"/>
+      <stop offset="1" stop-color="#c35cf2"/>
+    </linearGradient>
+
+    <radialGradient id="blobGlow" cx="0.39" cy="0.24" r="0.72">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.42" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="glyphFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f5f7ff"/>
+    </linearGradient>
+
+    <filter id="tileShadow" x="-25%" y="-25%" width="150%" height="170%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="44" stdDeviation="42" flood-color="#4f5877" flood-opacity="0.20"/>
+      <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#68718e" flood-opacity="0.10"/>
+    </filter>
+
+    <filter id="blobShadow" x="-25%" y="-25%" width="150%" height="170%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="31" stdDeviation="28" flood-color="#35469d" flood-opacity="0.34"/>
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#4a3aa2" flood-opacity="0.20"/>
+    </filter>
+
+    <filter id="glyphShadow" x="-80%" y="-80%" width="260%" height="280%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="13" flood-color="#263b9f" flood-opacity="0.44"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#ffffff" flood-opacity="0.22"/>
+    </filter>
+
+    <filter id="softInset" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset dy="-7" result="offsetBlur"/>
+      <feComposite in="offsetBlur" in2="SourceAlpha" operator="out" result="inverse"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.5" result="color"/>
+      <feComposite in="color" in2="inverse" operator="in" result="shadow"/>
+      <feComposite in="shadow" in2="SourceGraphic" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="2048" height="2048" fill="url(#pageBg)"/>
+
+  <g filter="url(#tileShadow)">
+    <rect x="165" y="165" width="1718" height="1718" rx="332" fill="url(#tileFill)"/>
+    <rect x="176" y="176" width="1696" height="1696" rx="321" fill="none" stroke="#ffffff" stroke-width="10" stroke-opacity="0.72"/>
+  </g>
+
+  <g filter="url(#blobShadow)">
+    <path id="blob" d="
+      M 350 886
+      C 309 782 340 667 422 589
+      C 484 530 579 513 620 426
+      C 679 298 801 229 935 254
+      C 1029 272 1091 354 1176 377
+      C 1276 404 1331 352 1448 382
+      C 1590 418 1686 548 1677 694
+      C 1671 783 1624 832 1667 920
+      C 1722 1034 1745 1153 1679 1263
+      C 1594 1408 1415 1470 1268 1432
+      C 1169 1406 1113 1344 1007 1368
+      C 892 1394 839 1460 694 1450
+      C 548 1440 432 1365 387 1234
+      C 361 1156 376 1089 331 1020
+      C 297 968 316 915 350 886 Z" fill="url(#blobFill)" filter="url(#softInset)"/>
+    <use href="#blob" fill="url(#blobGlow)"/>
+  </g>
+
+  <g fill="none" stroke="url(#glyphFill)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glyphShadow)">
+    <path d="M 599 714 L 529 786 L 599 856"/>
+    <path d="M 726 714 L 796 786 L 726 856"/>
+  </g>
+
+  <g fill="url(#glyphFill)" filter="url(#glyphShadow)">
+    <rect x="947" y="755" width="45" height="67" rx="22.5"/>
+    <rect x="1032" y="705" width="45" height="157" rx="22.5"/>
+    <rect x="1117" y="655" width="45" height="257" rx="22.5"/>
+    <rect x="1202" y="575" width="45" height="417" rx="22.5"/>
+    <rect x="1287" y="660" width="45" height="247" rx="22.5"/>
+    <rect x="1372" y="705" width="45" height="157" rx="22.5"/>
+    <rect x="1457" y="755" width="45" height="67" rx="22.5"/>
+  </g>
+
+  <g fill="url(#glyphFill)" filter="url(#glyphShadow)">
+    <rect x="700" y="1037" width="690" height="50" rx="25"/>
+    <rect x="745" y="1148" width="370" height="49" rx="24.5"/>
+    <rect x="1160" y="1148" width="116" height="49" rx="24.5"/>
+  </g>
+</svg>
