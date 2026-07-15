@@ -230,10 +230,21 @@ public sealed class Win32TrayIcon : IDisposable
 
     private static nint LoadIcon()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "Assets", "codex-voice-input.png");
-        if (File.Exists(path))
+        var iconPath = Path.Combine(AppContext.BaseDirectory, "Assets", "codex-voice-input.ico");
+        if (File.Exists(iconPath))
         {
-            using var bitmap = new Bitmap(path);
+            var size = Math.Max(16, GetSystemMetrics(49));
+            var icon = LoadImage(0, iconPath, 1, size, size, 0x00000010);
+            if (icon != 0)
+            {
+                return icon;
+            }
+        }
+
+        var pngPath = Path.Combine(AppContext.BaseDirectory, "Assets", "codex-voice-input.png");
+        if (File.Exists(pngPath))
+        {
+            using var bitmap = new Bitmap(pngPath);
             using var resized = new Bitmap(bitmap, new Size(32, 32));
             return resized.GetHicon();
         }
@@ -364,6 +375,12 @@ public sealed class Win32TrayIcon : IDisposable
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     private static extern nint LoadIcon(nint hInstance, nint lpIconName);
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern nint LoadImage(nint hinst, string lpszName, uint uType, int cxDesired, int cyDesired, uint fuLoad);
+
+    [DllImport("user32.dll")]
+    private static extern int GetSystemMetrics(int nIndex);
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
     private static extern nint GetModuleHandle(string? lpModuleName);
