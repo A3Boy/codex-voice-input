@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Codex voice typing · ChatGPT speech to text · Windows multilingual dictation · Voice input for almost any text box · Codex asr
+Codex ASR · ChatGPT speech to text · Windows multilingual dictation · Voice typing for almost any text box
 </p>
 
 <p align="center">
